@@ -1,1 +1,3 @@
-# Clueless-Fashion-Clean-Repo-
+# Clueless-Fashion-Clean-Repo
+
+Welcome to the Clueless Fashion Github Page! Our team was Gracie, Eva, Ivana, Cheik, and Theo. Our original Github page has all of our documented progress dates and working docs throughout the semester, but as we learned how to branch and commit in a cleaner way, we decided that making a new repo at the end with organized files would be a good idea! In our main page, we have our index.html which has all the dependencies loaded in the page. We split up 2 other branches that showcase our data cleaning inputs and outpust as well as our backend. The goal of Clueless Fashion is to allow users to explore new outfit combinations and select a new outfit to add to their closet! Enjoy, and hope you are no longer clueless after visiting our page :)
