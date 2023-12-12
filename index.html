@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dhurjati&display=swap" rel="stylesheet"><!-- Add Fashionable Font -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <style>
+    body {
+        background-color: #f48bc0;
+      /*background-color: #f0acce;*/
+      margin: 0;
+      padding: 20px;
+      font-family: 'Dhurjati', sans-serif; /* Apply the custom font */
+    }
+
+    html {
+      font-family: 'Dhurjati', sans-serif;
+    }
+
+    h1 {
+      font-family: 'Dhurjati', sans-serif; /* Apply the fashionable font to the title */
+      color: #ee2288;
+      text-align: center; /* Set title color */
+    }
+
+    .carousel-img {
+      width: 140px;
+      height: 250px;
+      border: 1px solid #ddd; /* Add a light border */
+      border-radius: 5px;
+      cursor: pointer; /* Optional: Add border radius */
+    }
+
+    .carousel-img.selected {
+  border: 2px solid #ee2288; /* Add a border to the selected item */
+  box-shadow: 0 0 10px rgba(238, 34, 136, 0.8); /* Add a box-shadow to the selected item */
+}
+
+
+    #tops-container,
+    #bottoms-container {
+      margin-bottom: 10px; /* Add margin between carousels */
+    }
+
+
+
+    #nextTopButton,
+    #selectTopButton,
+    #nextBottomButton,
+    #selectBottomButton,
+    #addToClosetButton {
+      background-color: #ee2288; /* Green background color */
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Dhurjati', sans-serif;
+    }
+
+    button{
+        background-color: #ee2288; /* Green background color */
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Dhurjati', sans-serif;
+      margin-bottom: 5px;
+    }
+
+    #nextTopButton:hover,
+    #selectTopButton:hover,
+    #nextBottomButton:hover,
+    #selectBottomButton:hover,
+    #addToClosetButton:hover {
+      background-color: #a04586; /* Darker green on hover */
+    }
+
+    #myClosetLink {
+      display: block;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    #myClosetList {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #myClosetList li {
+      margin-bottom: 15px;
+      text-align: left;
+      margin-left: 50%
+    }
+
+    .closetItemImage {
+      width: 270px;
+      height: 270px;
+      border: 1px solid #ddd; /* Add a light border */
+      border-radius: 5px; /* Optional: Add border radius */
+      margin-bottom: 5px;
+    }
+    
+    
+
+    .tab-content {
+      display: none;
+    }
+
+    .as_if p{
+        text-align: left;
+    }
+
+    .as_if h2{
+        text-align: left;
+        color:#ee2288
+    }
+
+    .active-tab {
+      display: block;
+    }
+
+    @-webkit-keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
+  }
+  
+  to {
+    -webkit-filter: hue-rotate(360deg);
+  }
+}
+.discoball {
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-name: hue;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  
+  background: lightgrey;
+  border-radius: 200px;
+  /*border: 0px solid #fff;*/
+  height: 100px;
+  width: 100px;
+  box-shadow: 0 3px 200px -3px #fff;
+  margin-left: 46.5%;
+  margin-top: 2%;
+  
+  
+}
+.discoball img {
+  height: 100px;
+  width: 100px;
+
+}
+.hanger {
+  background: #fff;
+  width: 1px;
+  border-left: 2px solid #fff;
+  border-right: 2px solid #fff;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+  .as_if {
+    color: white;
+    border: none;
+    font-family: 'Dhurjati', sans-serif;
+    font-size: 25px;
+    text-align: right;
+    margin-right: 20%;
+ 
+  }
+
+.as_if img{
+    height: 220px;
+    width: 220px;
+    margin-right: 50%;
+}
+
+
+
+
+.lowercloset{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+  </style>
+</head>
+<body>
+  
+
+  <!-- Tabs -->
+  <div>
+    <button onclick="openTab('selectOutfitTab')">Select Outfit</button>
+    <button onclick="openTab('myClosetTab')">My Closet</button>
+  </div>
+
+  <!-- Select Outfit Tab -->
+  <div id="selectOutfitTab" class="tab-content active-tab">
+    <h1>Clueless Fashion</h1>
+    <div id="tops-container">
+      <!-- Carousel for Tops will be appended here -->
+    </div>
+
+    <div id="bottoms-container">
+      <!-- Carousel for Bottoms will be appended here -->
+    </div>
+
+    <button id="selectTopButton">Select Top</button>
+    <button id="nextTopButton">Next!</button>
+    <button id="selectBottomButton">Select Bottom</button>
+    <button id="nextBottomButton">Next!</button>
+    
+    <button id="addToClosetButton">Add to My Closet</button>
+  </div>
+
+<!-- My Closet Tab -->
+<div id="myClosetTab" class="tab-content">
+    <div class="hanger"></div>
+<div class="discoball">
+  <img src="https://drive.google.com/uc?id=0B7QrEBMF4GTGQ3lfRzV0cU5rNHM" alt="">
+</div>
+
+
+<div class="lowercloset">
+    <ul id="myClosetList">
+        <!-- Selected combinations will be added here -->
+    </ul>
+    <div class="as_if"> 
+        <p>Your selected outfit is...</p>
+        <h2>Cher Approved</h2>
+        <p>As if you wouldn't make the coolest outfit combo!</p>
+
+    
+
+
+    <img src="https://cbubanner.com/wp-content/uploads/2020/02/NicePng_clueless-png_1899798.png" alt="">
+</div>
+</div>
+</div>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Your Python output goes here as 'pythonOutput'...
+      const pythonOutput = {'bottoms': [{'id': 1, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/df30bc92249a83ec84b5ba682bf5a0fa_images.jpg'}, {'id': 2, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/021cc52e8426a3d983e4d7ec660a70b2_images.jpg'}, {'id': 3, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/787b1a9dd9abb5279976bac35ab78c2d_images.jpg'}, {'id': 4, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/9556d66f526ab7923d599fdddee1e4b9_images.jpg'}, {'id': 5, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/Nike-Men-Grey-Melange-Track-Pants_ec04f71d66884cf587041154b74517c2_images.jpg'}, {'id': 6, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/0ea46424229645fa229d38b0eff4afc5_images.jpg'}, {'id': 7, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/Nike-Men-Black-Three-Quarter-Track-Pants_38fb020e318c77b678317fe9d16695a0_images.jpg'}, {'id': 8, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/87ae1ed282a5057fafbf1d693b247659_images.jpg'}, {'id': 9, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/434ee4b4ee8cc7d9ed0f2e7e975960d8_images.jpg'}, {'id': 10, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/0dc04c9600a1bcb794629e743779bf35_images.jpg'}, {'id': 11, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/894025afc35ba6f9924867af75d608c4_images.jpg'}], 
+    'tops': [{'id': 1, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/2fc776b82eaaf82497f1a13cf63eb073_images.jpg'}, {'id': 2, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/5dc5a3265be8eeefdbd7c06e43ff6cb9_images.jpg'}, {'id': 3, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/74f42a1523d450362f6579f96b64b608_images.jpg'}, {'id': 4, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/54315bd731592e29d830218599d0a974_images.jpg'}, {'id': 5, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/11208e022cee193bc9ce69ae7601d11e_images.jpg'}, {'id': 6, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/c683c989cc53d172a8d9b175d75d1294_images.jpg'}, {'id': 7, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/a062e261b6d3e1349a6d2a6aa7371669_images.jpg'}, {'id': 8, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/8294dba13908524b577b295ca6282838_images.jpg'}, {'id': 9, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/4576528b60bdbec05893efe87d2c284b_images.jpg'}, {'id': 10, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/9f87ee7f474418708b44f85560868489_images.jpg'}, {'id': 11, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/b6a7fd3fd2f7ec8b6633854e4c10312f_images.jpg'}, {'id': 12, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/dcdf10855cb9709e3ff034e62313a54c_images.jpg'}, {'id': 13, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/888b6b3f4e53b64b22b4c836ecca0666_images.jpg'}, {'id': 14, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/7317c5199336e94d3501ffb607cc5b12_images.jpg'}, {'id': 15, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/cef2af04f8327e7d5dc432bc72ddda5f_images.jpg'}, {'id': 16, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/da791422b3800d0abcca75d600a83f79_images.jpg'}, {'id': 17, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/d099fee09179cfa2b806d8728cf4542a_images.jpg'}, {'id': 18, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/cb273208c26f6ddaf749b9fb11b827b1_images.jpg'}, {'id': 19, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/8483c7e54ece0a2de025182f4b30e3b5_images.jpg'}, {'id': 20, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/f891a7ec22ae36e8c14defd61bb0b7f3_images.jpg'}, {'id': 21, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/826d8f5d5e64a05b51c0afd3d5adb1ba_images.jpg'}, {'id': 22, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/612c8af18a9a4b6010fdd16dd80d5246_images.jpg'}, {'id': 23, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/c2e91f240ec1503abde9529cdea2e434_images.jpg'}, {'id': 24, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/0ce5fc38767b9140c4e2c5efe8dbbb31_images.jpg'}, {'id': 25, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/fd92254d0f9006661bee76ac33f5c9bf_images.jpg'}, {'id': 26, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/7f8898f2b88316fdc4cc970f08b56daf_images.jpg'}, {'id': 27, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/feee09d16daa4bd9f01bb6a87693aa84_images.jpg'}, {'id': 28, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/74b69fbb1f5697af585c3ebc18315918_images.jpg'}, {'id': 29, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/eb6356e3915780613a7c3533ad3fdab0_images.jpg'}, {'id': 30, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/031fdac535f3c5630b6c63a1dbbbb859_images.jpg'}, {'id': 31, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/4c4c7f32dcf714a378b5fb818b84a57e_images.jpg'}, {'id': 32, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/a999c915f8b14dbff2b8d1709061c903_images.jpg'}, {'id': 33, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/74bc9f69684b61729b7950ff07114d49_images.jpg'}, {'id': 34, 'name': 'Apparel', 'image': 'http://assets.myntassets.com/v1/images/style/properties/0a8c0bf5d6f680a4b712050a67c63c84_images.jpg'}], 'shoes': [{'id': 1, 'name': 'Footwear', 'image': 'http://assets.myntassets.com/v1/images/style/properties/ca06d73e7eabdfe68bcdee9c3a8739fc_images.jpg'}, {'id': 2, 'name': 'Footwear', 'image': 'http://assets.myntassets.com/v1/images/style/properties/c876491b1ad3bbece863d5bf29408446_images.jpg'}, {'id': 3, 'name': 'Footwear', 'image': 'http://assets.myntassets.com/v1/images/style/properties/8c7024fc08196b33759515ff1d542899_images.jpg'}]};
+  
+      const clothingDatabase = {};
+      for (const type in pythonOutput) {
+        if (pythonOutput.hasOwnProperty(type)) {
+          clothingDatabase[type] = pythonOutput[type].map(item => ({
+            id: item.id,
+            name: item.name,
+            image: item.image
+          }));
+        }
+      }
+  
+let selectedTop = null;
+let selectedBottom = null;
+
+function addToCloset() {
+  if (selectedTop && selectedBottom) {
+    // Store selected items in localStorage for the "My Closet" page
+    localStorage.setItem('selectedTop', JSON.stringify(selectedTop));
+    localStorage.setItem('selectedBottom', JSON.stringify(selectedBottom));
+
+    // Display selected combinations in the closet
+    const closetList = document.getElementById('myClosetList');
+    closetList.innerHTML = ''; // Clear existing items
+
+    const listItem = document.createElement('li');
+
+    // Create a container for the top image
+    const topContainer = document.createElement('div');
+    const topImage = document.createElement('img');
+    topImage.src = selectedTop.image;
+    topImage.alt = 'Top Image';
+    topImage.className = 'closetItemImage';
+    topContainer.appendChild(topImage);
+
+    // Create a container for the bottom image
+    const bottomContainer = document.createElement('div');
+    const bottomImage = document.createElement('img');
+    bottomImage.src = selectedBottom.image;
+    bottomImage.alt = 'Bottom Image';
+    bottomImage.className = 'closetItemImage';
+    bottomContainer.appendChild(bottomImage);
+
+    // Append containers to the list item
+    listItem.appendChild(topContainer);
+    listItem.appendChild(bottomContainer);
+
+    closetList.appendChild(listItem);
+
+    alert('Item added to My Closet!');
+  } else {
+    alert('Please select both a top and a bottom before adding to My Closet.');
+  }
+}
+
+
+  
+      function initializeCarousel(containerId, nextButtonId, selectButtonId, items, itemType) {
+        const container = document.getElementById(containerId);
+        const nextButton = document.getElementById(nextButtonId);
+        const selectButton = document.getElementById(selectButtonId);
+        let currentIndex = 0;
+
+        
+  
+        for (const item of items) {
+          const imageUrl = item.image;
+          const imageElement = document.createElement('img');
+          imageElement.classList.add('carousel-img');
+          imageElement.src = imageUrl;
+          container.appendChild(imageElement);
+        }
+  
+        $(container).slick({
+          slidesToShow: 5,
+          slidesToScroll: 1,
+          autoplay: false,
+        });
+  
+        $(container).on('afterChange', function (event, slick, currentSlide) {
+          currentIndex = currentSlide;
+        });
+  
+        nextButton.addEventListener('click', function() {
+          currentIndex = (currentIndex + 1) % items.length;
+          $(container).slick('slickGoTo', currentIndex);
+          selectItem();
+        });
+  
+        selectButton.addEventListener('click', function() {
+          if (itemType === 'tops') {
+            selectedTop = clothingDatabase['tops'][currentIndex];
+          } else if (itemType === 'bottoms') {
+            selectedBottom = clothingDatabase['bottoms'][currentIndex];
+          }
+          alert(`Selected ${itemType === 'tops' ? 'Top' : 'Bottom'}: ${selectedTop ? selectedTop.name : ''}, ${selectedBottom ? 'Bottom: ' + selectedBottom.name : ''}`);
+          selectItem();
+        });
+      }
+  
+      initializeCarousel('tops-container', 'nextTopButton', 'selectTopButton', clothingDatabase['tops'], 'tops');
+      initializeCarousel('bottoms-container', 'nextBottomButton', 'selectBottomButton', clothingDatabase['bottoms'], 'bottoms');
+  
+      document.getElementById('addToClosetButton').addEventListener('click', addToCloset);
+    });
+  
+    function openTab(tabName) {
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => tab.classList.remove('active-tab'));
+  
+      const activeTab = document.getElementById(tabName);
+      activeTab.classList.add('active-tab');
+    }
+  </script>
+  
+
+</body>
+</html>
+
+
+
