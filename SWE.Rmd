@@ -1,0 +1,65 @@
+---
+title: "SWE"
+author: "Gracie Abrahams"
+date: "2023-11-29"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+styles <- read.csv("/Users/Grace/Downloads/styles.csv")
+```
+```{r}
+images <- read.csv("/Users/Grace/Downloads/images.csv")
+library(dplyr)
+
+# Assuming your data frame is called images
+images$filename <- gsub(".jpg", "", images$filename)
+
+images <- images %>%
+  rename(id = filename)
+images
+```
+```{r}
+# Assuming your data frames are called images and styles
+merged_data <- merge(images, styles, by.x = "id", by.y = "id")
+
+
+df <-select(merged_data, id, link, masterCategory, subCategory)
+
+df <- df %>%
+  mutate(subCategory = case_when(
+    subCategory == "Bottomwear" ~ "bottoms",
+    subCategory == "Topwear" ~ "tops",
+    subCategory == "Shoes" ~ "shoes",
+    TRUE ~ subCategory
+  ))
+df <- slice(df, 1:200)
+df2 <- df %>%
+  mutate(type = subCategory) |>
+  mutate(url = link) |>
+  mutate(name = masterCategory) |>
+  select(type, url, name)
+
+
+
+df_filtered <- df2 %>%
+  filter(type %in% c("tops", "bottoms", "shoes"))
+df_filtered
+```
+
+
+```{r}
+# Assuming your data frame is called df
+write.csv(df_filtered, file = "/Users/Grace/Downloads/clean_clothing.csv", row.names = FALSE)
+
+```
+
+
+
+
+
